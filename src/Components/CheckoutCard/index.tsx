@@ -1,15 +1,10 @@
-import React from "react";
-
 import Card from "../../shared/Card";
 import List from "../../shared/List";
 import Span from "../../shared/Span";
 import Text from "../../shared/Text";
 import Input from "../../shared/Input";
-import Header from "../../shared/Header";
 import Button from "../../shared/Button";
 import ListItem from "../../shared/ListItem";
-
-import { Item } from "../../types/item";
 
 import {
   currency,
@@ -17,36 +12,29 @@ import {
   totalCostInLocalCurrency,
 } from "../../utils";
 
+import { Item } from "../../types/item";
+import { useItems } from "../../hooks/item";
+
 type CheckoutCardProps = {
   items: Item[];
-  setItems: React.Dispatch<
-    React.SetStateAction<
-      {
-        id: string;
-        price: number;
-        quantity: number;
-        name: string;
-      }[]
-    >
-  >;
 };
 
-export default function CheckoutCard({ items, setItems }: CheckoutCardProps) {
-  const handleChange = (itemId: string, value: string) => {
-    if (isNaN(Number(value))) {
-      return alert("Please insert a valid number");
-    }
-    setItems((items) => {
-      return items.map((item) =>
-        item.id === itemId ? { ...item, quantity: Number(value) } : item
-      );
-    });
+export default function CheckoutCard({ items }: CheckoutCardProps) {
+  const { removeItem, changeItemQuantity, clearItemsQuantity } = useItems();
+
+  const handleChange = (itemId: string, newQuantity: string) => {
+    changeItemQuantity(itemId, Number(newQuantity));
+  };
+
+  const handleRemoveClick = (
+    _: React.MouseEvent<HTMLButtonElement>,
+    itemId: string
+  ) => {
+    removeItem(itemId);
   };
 
   const handleClearClick = () => {
-    setItems((items) => {
-      return items.map((item) => ({ ...item, quantity: 0 }));
-    });
+    clearItemsQuantity();
   };
 
   const handleCheckoutClick = () => {
@@ -58,21 +46,12 @@ export default function CheckoutCard({ items, setItems }: CheckoutCardProps) {
     );
   };
 
-  const handleRemoveClick = (
-    _: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    itemId: string
-  ) => {
-    setItems((items) => {
-      return items.filter((item) => item.id !== itemId);
-    });
-  };
   return (
     <Card>
-      <Header>My Basket App</Header>
       <List>
-        {items.map(({ id, name, price, quantity }) => (
+        {items.map(({ id, title, price, quantity }) => (
           <ListItem key={id}>
-            <Span>{name}</Span>
+            <Span>{title}</Span>
             <Input
               value={quantity}
               onChange={({ target: { value } }) => handleChange(id, value)}

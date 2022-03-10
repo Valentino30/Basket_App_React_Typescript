@@ -1,32 +1,9 @@
-import { nanoid } from "nanoid";
-
 import { Currency, Item } from "../types/item";
 
 export const currency = {
   country: "en-US",
   currency: "USD",
 };
-
-export const initialItems = [
-  {
-    id: nanoid(),
-    price: 2,
-    quantity: 2,
-    name: "Mountain Dew",
-  },
-  {
-    id: nanoid(),
-    price: 3,
-    quantity: 6,
-    name: "Desperados",
-  },
-  {
-    id: nanoid(),
-    price: 4,
-    quantity: 4,
-    name: "Jack Daniels",
-  },
-];
 
 export const costInLocalCurrency = (
   cost: number,
@@ -39,6 +16,7 @@ export const costInLocalCurrency = (
 
   return costInLocalCurrency;
 };
+
 export const totalCostInLocalCurrency = (
   items: Item[],
   { country, currency }: Currency
