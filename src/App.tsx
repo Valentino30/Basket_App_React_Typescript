@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { initialItems } from "./utils";
+import { calculateTotalCost, currency, initialItems } from "./utils";
 
 function App() {
   const [items, setItems] = useState(initialItems);
@@ -20,24 +20,29 @@ function App() {
   };
 
   const handleCheckoutClick = () => {
-    alert('Purchase completed!')
-  }
+    alert(
+      `Total cost: ${currency} ${calculateTotalCost(
+        items
+      )}. Press okay to proceed with the payment.`
+    );
+  };
 
   return (
     <div>
       <h1>My Basket App</h1>
       <ul>
-        {items.map(({ id, name, price, currency, quantity }) => (
+        {items.map(({ id, name, price, quantity }) => (
           <li key={id}>
             <span>{name}</span>
             <input
               value={quantity}
               onChange={({ target: { value } }) => handleChange(id, value)}
             />
-            <span>{`${price * quantity} ${currency}`}</span>
+            <span>{`${currency} ${price * quantity}`}</span>
           </li>
         ))}
       </ul>
+      <p>{`${currency} ${calculateTotalCost(items)}`}</p>
       <button onClick={handleClearClick}>Clear</button>
       <button onClick={handleCheckoutClick}>Check out</button>
     </div>
