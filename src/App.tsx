@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-import { calculateTotalCost, currency, initialItems } from "./utils";
+import {
+  currency,
+  initialItems,
+  costInLocalCurrency,
+  totalCostInLocalCurrency,
+} from "./utils";
 
 function App() {
   const [items, setItems] = useState(initialItems);
@@ -24,8 +29,9 @@ function App() {
 
   const handleCheckoutClick = () => {
     alert(
-      `Total cost: ${currency} ${calculateTotalCost(
-        items
+      `Total cost: ${currency} ${totalCostInLocalCurrency(
+        items,
+        currency
       )}. Press okay to proceed with the payment.`
     );
   };
@@ -50,12 +56,12 @@ function App() {
               value={quantity}
               onChange={({ target: { value } }) => handleChange(id, value)}
             />
-            <span>{`${currency} ${price * quantity}`}</span>
+            <span>{costInLocalCurrency(price * quantity, currency)}</span>
             <button onClick={(_) => handleRemoveClick(_, id)}>x</button>
           </li>
         ))}
       </ul>
-      <p>{`${currency} ${calculateTotalCost(items)}`}</p>
+      <p>{totalCostInLocalCurrency(items, currency)}</p>
       <button onClick={handleClearClick}>Clear</button>
       <button onClick={handleCheckoutClick}>Check out</button>
     </div>

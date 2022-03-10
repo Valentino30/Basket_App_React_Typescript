@@ -4,3 +4,8 @@ export type Item = {
   price: number;
   quantity: number;
 };
+
+export type Currency = {
+  country: string;
+  currency: string;
+};
