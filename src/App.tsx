@@ -4,11 +4,18 @@ import { initialItems } from "./utils";
 
 function App() {
   const [items, setItems] = useState(initialItems);
+
   const handleChange = (itemId: string, value: string) => {
     setItems((items) => {
       return items.map((item) => {
         return item.id === itemId ? { ...item, quantity: Number(value) } : item;
       });
+    });
+  };
+
+  const handleClick = () => {
+    setItems((items) => {
+      return items.map((item) => ({ ...item, quantity: 0 }));
     });
   };
 
@@ -27,6 +34,7 @@ function App() {
           </li>
         ))}
       </ul>
+      <button onClick={handleClick}>Clear</button>
     </div>
   );
 }
