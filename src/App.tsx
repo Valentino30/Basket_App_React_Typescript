@@ -7,9 +7,9 @@ function App() {
 
   const handleChange = (itemId: string, value: string) => {
     setItems((items) => {
-      return items.map((item) => {
-        return item.id === itemId ? { ...item, quantity: Number(value) } : item;
-      });
+      return items.map((item) =>
+        item.id === itemId ? { ...item, quantity: Number(value) } : item
+      );
     });
   };
 
@@ -27,6 +27,15 @@ function App() {
     );
   };
 
+  const handleRemoveClick = (
+    _: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    itemId: string
+  ) => {
+    setItems((items) => {
+      return items.filter((item) => item.id !== itemId);
+    });
+  };
+
   return (
     <div>
       <h1>My Basket App</h1>
@@ -39,6 +48,7 @@ function App() {
               onChange={({ target: { value } }) => handleChange(id, value)}
             />
             <span>{`${currency} ${price * quantity}`}</span>
+            <button onClick={(_) => handleRemoveClick(_, id)}>x</button>
           </li>
         ))}
       </ul>
