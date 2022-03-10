@@ -1,5 +1,14 @@
 import { useState } from "react";
 
+import Text from "./shared/Text";
+import Span from "./shared/Span";
+import List from "./shared/List";
+import Card from "./shared/Card";
+import Input from "./shared/Input";
+import Button from "./shared/Button";
+import Header from "./shared/Header";
+import ListItem from "./shared/ListItem";
+
 import {
   currency,
   initialItems,
@@ -46,31 +55,31 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>My Basket App</h1>
-      <ul>
+    <Card>
+      <Header>My Basket App</Header>
+      <List>
         {items.map(({ id, name, price, quantity }) => (
-          <li key={id}>
-            <span>{name}</span>
-            <input
+          <ListItem key={id}>
+            <Span>{name}</Span>
+            <Input
               value={quantity}
               onChange={({ target: { value } }) => handleChange(id, value)}
             />
-            <span>{costInLocalCurrency(price * quantity, currency)}</span>
-            <button onClick={(_) => handleRemoveClick(_, id)}>x</button>
-          </li>
+            <Span>{costInLocalCurrency(price * quantity, currency)}</Span>
+            <Button onClick={(_) => handleRemoveClick(_, id)}>x</Button>
+          </ListItem>
         ))}
-      </ul>
+      </List>
       {items.length !== 0 ? (
         <>
-          <p>{totalCostInLocalCurrency(items, currency)}</p>
-          <button onClick={handleClearClick}>Clear</button>
-          <button onClick={handleCheckoutClick}>Check out</button>
+          <Text>{totalCostInLocalCurrency(items, currency)}</Text>
+          <Button onClick={handleClearClick}>Clear</Button>
+          <Button onClick={handleCheckoutClick}>Check out</Button>
         </>
       ) : (
-        <p>Your basket is empty</p>
+        <Text>Your basket is empty.</Text>
       )}
-    </div>
+    </Card>
   );
 }
 
