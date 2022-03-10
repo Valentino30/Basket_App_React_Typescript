@@ -13,11 +13,15 @@ function App() {
     });
   };
 
-  const handleClick = () => {
+  const handleClearClick = () => {
     setItems((items) => {
       return items.map((item) => ({ ...item, quantity: 0 }));
     });
   };
+
+  const handleCheckoutClick = () => {
+    alert('Purchase completed!')
+  }
 
   return (
     <div>
@@ -34,7 +38,8 @@ function App() {
           </li>
         ))}
       </ul>
-      <button onClick={handleClick}>Clear</button>
+      <button onClick={handleClearClick}>Clear</button>
+      <button onClick={handleCheckoutClick}>Check out</button>
     </div>
   );
 }
