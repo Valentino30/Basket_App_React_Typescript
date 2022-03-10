@@ -6,6 +6,9 @@ function App() {
   const [items, setItems] = useState(initialItems);
 
   const handleChange = (itemId: string, value: string) => {
+    if (isNaN(Number(value))) {
+      return alert("Please insert a valid number");
+    }
     setItems((items) => {
       return items.map((item) =>
         item.id === itemId ? { ...item, quantity: Number(value) } : item
