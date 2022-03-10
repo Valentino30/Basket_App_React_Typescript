@@ -29,10 +29,10 @@ function App() {
 
   const handleCheckoutClick = () => {
     alert(
-      `Total cost: ${currency} ${totalCostInLocalCurrency(
+      `Total cost: ${totalCostInLocalCurrency(
         items,
         currency
-      )}. Press okay to proceed with the payment.`
+      )}. Press okay to select your method of payment.`
     );
   };
 
@@ -61,9 +61,15 @@ function App() {
           </li>
         ))}
       </ul>
-      <p>{totalCostInLocalCurrency(items, currency)}</p>
-      <button onClick={handleClearClick}>Clear</button>
-      <button onClick={handleCheckoutClick}>Check out</button>
+      {items.length !== 0 ? (
+        <>
+          <p>{totalCostInLocalCurrency(items, currency)}</p>
+          <button onClick={handleClearClick}>Clear</button>
+          <button onClick={handleCheckoutClick}>Check out</button>
+        </>
+      ) : (
+        <p>Your basket is empty</p>
+      )}
     </div>
   );
 }
