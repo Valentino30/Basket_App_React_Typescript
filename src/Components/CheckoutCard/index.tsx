@@ -6,6 +6,7 @@ import Button from "../../shared/Button";
 import Wrapper from "../../shared/Wrapper";
 import TableRow from "../../shared/TableRow";
 import TableData from "../../shared/TableData";
+import ButtonGroup from "../../shared/ButtonGroup";
 import IconButton from "../../shared/IconButton/Button";
 
 import {
@@ -78,9 +79,13 @@ export default function CheckoutCard({ items }: CheckoutCardProps) {
             ))}
           </Table>
           <Wrapper>
-            <Text>{totalCostInLocalCurrency(items, currency)}</Text>
-            <Button onClick={handleClearClick}>Clear</Button>
-            <Button onClick={handleCheckoutClick}>{`${"Check out >"}`}</Button>
+            <Text bold>{totalCostInLocalCurrency(items, currency)}</Text>
+            <ButtonGroup>
+              <Button onClick={handleClearClick}>Clear</Button>
+              <Button
+                onClick={handleCheckoutClick}
+              >{`${"Check Out >"}`}</Button>
+            </ButtonGroup>
           </Wrapper>
         </>
       ) : (
