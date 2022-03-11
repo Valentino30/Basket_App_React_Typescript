@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { createContext, useContext, useState } from "react";
 
 import { getItemsRequest } from "../api/item";
@@ -22,18 +23,20 @@ export const ItemsProvider = ({ children }: { children: React.ReactNode }) => {
     } catch (error) {
       setItems([]);
       setIsGettingItems(false);
+      toast.error("Oops! Something went wrong");
     }
   };
 
   const changeItemQuantity = (itemId: string, value: number) => {
     if (isNaN(Number(value))) {
-      return alert("Please insert a valid number");
+      toast.error("Please insert a valid number");
+    } else {
+      setItems((items) => {
+        return items.map((item) =>
+          item.id === itemId ? { ...item, quantity: Number(value) } : item
+        );
+      });
     }
-    setItems((items) => {
-      return items.map((item) =>
-        item.id === itemId ? { ...item, quantity: Number(value) } : item
-      );
-    });
   };
 
   const removeItem = (itemId: string) => {
