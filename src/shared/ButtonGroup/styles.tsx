@@ -4,10 +4,10 @@ export const StyledButtonGroup = styled.div`
   button:nth-child(1) {
     background-color: #f4f5f7;
     margin-right: 10px;
-    color: grey;
+    color: #827f7f;
   }
   button:nth-child(2) {
-    background-color: #4c9aff;
+    background-color: #6fbbe1;
     color: white;
   }
 `;

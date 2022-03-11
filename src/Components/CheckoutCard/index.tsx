@@ -64,7 +64,9 @@ export default function CheckoutCard({ items }: CheckoutCardProps) {
                   />
                 </TableData>
                 <TableData>
-                  <Text>{costInLocalCurrency(price * quantity, currency)}</Text>
+                  <Text color="#E38A5A" bold>
+                    {costInLocalCurrency(price * quantity, currency)}
+                  </Text>
                 </TableData>
                 <TableData>
                   <IconButton onClick={(_) => handleRemoveClick(_, id)}>

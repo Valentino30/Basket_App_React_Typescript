@@ -5,5 +5,5 @@ export const StyledIconButton = styled.button`
   font-weight: bold;
   cursor: pointer;
   border: none;
-  color: gray;
+  color: #dad9d6;
 `;
