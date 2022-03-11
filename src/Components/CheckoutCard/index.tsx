@@ -53,7 +53,7 @@ export default function CheckoutCard({ items }: CheckoutCardProps) {
             {items.map(({ id, title, price, quantity }) => (
               <TableRow key={id}>
                 <TableData>
-                  <Text>{title}</Text>
+                  <Text marginRight="10px">{title}</Text>
                 </TableData>
                 <TableData>
                   <Input
@@ -64,7 +64,7 @@ export default function CheckoutCard({ items }: CheckoutCardProps) {
                   />
                 </TableData>
                 <TableData>
-                  <Text color="#E38A5A" bold>
+                  <Text color="#E38A5A" bold marginLeft="10px">
                     {costInLocalCurrency(price * quantity, currency)}
                   </Text>
                 </TableData>
