@@ -17,6 +17,7 @@ import {
 
 import { Item } from "../../types/item";
 import { useItems } from "../../hooks/item";
+import { toast } from "react-toastify";
 
 type CheckoutCardProps = {
   items: Item[];
@@ -41,12 +42,7 @@ export default function CheckoutCard({ items }: CheckoutCardProps) {
   };
 
   const handleCheckoutClick = () => {
-    alert(
-      `Total cost: ${totalCostInLocalCurrency(
-        items,
-        currency
-      )}. Press okay to select your method of payment.`
-    );
+    toast.success("Checkout Completed!");
   };
 
   return (
