@@ -1,7 +1,9 @@
+import { StyledParagraph } from "./styles";
+
 type TextProps = {
   children: string;
 };
 
 export default function Text({ children }: TextProps) {
-  return <p>{children}</p>;
+  return <StyledParagraph>{children}</StyledParagraph>;
 }
