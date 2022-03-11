@@ -1,7 +1,9 @@
+import { StyledTableRow } from "./styles";
+
 type TableRowProps = {
   children: React.ReactNode;
 };
 
 export default function TableRow({ children }: TableRowProps) {
-  return <tr>{children}</tr>;
+  return <StyledTableRow>{children}</StyledTableRow>;
 }
