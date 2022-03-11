@@ -1,10 +1,12 @@
 import Card from "../../shared/Card";
-import List from "../../shared/List";
-import Span from "../../shared/Span";
 import Text from "../../shared/Text";
+import Table from "../../shared/Table";
 import Input from "../../shared/Input";
 import Button from "../../shared/Button";
-import ListItem from "../../shared/ListItem";
+import Wrapper from "../../shared/Wrapper";
+import TableRow from "../../shared/TableRow";
+import TableData from "../../shared/TableData";
+import IconButton from "../../shared/IconButton/Button";
 
 import {
   currency,
@@ -13,9 +15,7 @@ import {
 } from "../../utils";
 
 import { Item } from "../../types/item";
-import Wrapper from "../../shared/Wrapper";
 import { useItems } from "../../hooks/item";
-import IconButton from "../../shared/IconButton/Button";
 
 type CheckoutCardProps = {
   items: Item[];
@@ -52,25 +52,35 @@ export default function CheckoutCard({ items }: CheckoutCardProps) {
     <Card>
       {items.length !== 0 ? (
         <>
-          <List>
+          <Table>
             {items.map(({ id, title, price, quantity }) => (
-              <ListItem key={id}>
-                <Span>{title}</Span>
-                <Input
-                  value={quantity}
-                  onChange={({ target: { value } }) => handleChange(id, value)}
-                />
-                <Span>{costInLocalCurrency(price * quantity, currency)}</Span>
-                <IconButton onClick={(_) => handleRemoveClick(_, id)}>
-                  x
-                </IconButton>
-              </ListItem>
+              <TableRow key={id}>
+                <TableData>
+                  <Text>{title}</Text>
+                </TableData>
+                <TableData>
+                  <Input
+                    value={quantity}
+                    onChange={({ target: { value } }) =>
+                      handleChange(id, value)
+                    }
+                  />
+                </TableData>
+                <TableData>
+                  <Text>{costInLocalCurrency(price * quantity, currency)}</Text>
+                </TableData>
+                <TableData>
+                  <IconButton onClick={(_) => handleRemoveClick(_, id)}>
+                    x
+                  </IconButton>
+                </TableData>
+              </TableRow>
             ))}
-          </List>
+          </Table>
           <Wrapper>
             <Text>{totalCostInLocalCurrency(items, currency)}</Text>
             <Button onClick={handleClearClick}>Clear</Button>
-            <Button onClick={handleCheckoutClick}>Check out</Button>
+            <Button onClick={handleCheckoutClick}>{`${"Check out >"}`}</Button>
           </Wrapper>
         </>
       ) : (
