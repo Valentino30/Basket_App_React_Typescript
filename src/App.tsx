@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Header from "./shared/Header";
 
 import { useItems } from "./hooks/item";
-import CheckoutCard from "./Components/CheckoutCard";
+import CheckoutCard from "./components/CheckoutCard";
 
 function App() {
   const { getItems, isGettingItems, items } = useItems();
