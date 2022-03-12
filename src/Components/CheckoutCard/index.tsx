@@ -1,10 +1,13 @@
 import Card from "../../shared/Card";
-import List from "../../shared/List";
-import Span from "../../shared/Span";
 import Text from "../../shared/Text";
+import Table from "../../shared/Table";
 import Input from "../../shared/Input";
 import Button from "../../shared/Button";
-import ListItem from "../../shared/ListItem";
+import Wrapper from "../../shared/Wrapper";
+import TableRow from "../../shared/TableRow";
+import TableData from "../../shared/TableData";
+import ButtonGroup from "../../shared/ButtonGroup";
+import IconButton from "../../shared/IconButton/Button";
 
 import {
   currency,
@@ -14,6 +17,7 @@ import {
 
 import { Item } from "../../types/item";
 import { useItems } from "../../hooks/item";
+import { toast } from "react-toastify";
 
 type CheckoutCardProps = {
   items: Item[];
@@ -38,34 +42,49 @@ export default function CheckoutCard({ items }: CheckoutCardProps) {
   };
 
   const handleCheckoutClick = () => {
-    alert(
-      `Total cost: ${totalCostInLocalCurrency(
-        items,
-        currency
-      )}. Press okay to select your method of payment.`
-    );
+    toast.success("Checkout Completed!");
   };
 
   return (
     <Card>
-      <List>
-        {items.map(({ id, title, price, quantity }) => (
-          <ListItem key={id}>
-            <Span>{title}</Span>
-            <Input
-              value={quantity}
-              onChange={({ target: { value } }) => handleChange(id, value)}
-            />
-            <Span>{costInLocalCurrency(price * quantity, currency)}</Span>
-            <Button onClick={(_) => handleRemoveClick(_, id)}>x</Button>
-          </ListItem>
-        ))}
-      </List>
       {items.length !== 0 ? (
         <>
-          <Text>{totalCostInLocalCurrency(items, currency)}</Text>
-          <Button onClick={handleClearClick}>Clear</Button>
-          <Button onClick={handleCheckoutClick}>Check out</Button>
+          <Table>
+            {items.map(({ id, title, price, quantity }) => (
+              <TableRow key={id}>
+                <TableData>
+                  <Text marginRight="10px">{title}</Text>
+                </TableData>
+                <TableData>
+                  <Input
+                    value={quantity}
+                    onChange={({ target: { value } }) =>
+                      handleChange(id, value)
+                    }
+                  />
+                </TableData>
+                <TableData>
+                  <Text color="#E38A5A" bold marginLeft="10px">
+                    {costInLocalCurrency(price * quantity, currency)}
+                  </Text>
+                </TableData>
+                <TableData>
+                  <IconButton onClick={(_) => handleRemoveClick(_, id)}>
+                    x
+                  </IconButton>
+                </TableData>
+              </TableRow>
+            ))}
+          </Table>
+          <Wrapper>
+            <Text bold>{totalCostInLocalCurrency(items, currency)}</Text>
+            <ButtonGroup>
+              <Button onClick={handleClearClick}>Clear</Button>
+              <Button
+                onClick={handleCheckoutClick}
+              >{`${"Check Out >"}`}</Button>
+            </ButtonGroup>
+          </Wrapper>
         </>
       ) : (
         <Text>Your basket is empty.</Text>

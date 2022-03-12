@@ -28,9 +28,8 @@ export const ItemsProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const changeItemQuantity = (itemId: string, value: number) => {
-    if (isNaN(Number(value))) {
-      toast.error("Please insert a valid number");
-    } else {
+    const valueIsAPositiveInteger = !isNaN(Number(value)) && Number(value) >= 0;
+    if (valueIsAPositiveInteger) {
       setItems((items) => {
         return items.map((item) =>
           item.id === itemId ? { ...item, quantity: Number(value) } : item
