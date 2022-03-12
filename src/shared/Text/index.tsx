@@ -1,9 +1,11 @@
 import { StyledParagraph } from "./styles";
 
-type TextProps = {
+export type TextProps = {
   bold?: boolean;
   color?: string;
   children: string;
+  ellipsis?: boolean;
+  textAlign?: string;
   marginLeft?: string;
   marginRight?: string;
 };
@@ -11,7 +13,9 @@ type TextProps = {
 export default function Text({
   marginRight,
   marginLeft,
+  textAlign,
   children,
+  ellipsis,
   color,
   bold,
 }: TextProps) {
@@ -19,6 +23,8 @@ export default function Text({
     <StyledParagraph
       marginRight={marginRight}
       marginLeft={marginLeft}
+      textAlign={textAlign}
+      ellipsis={ellipsis}
       color={color}
       bold={bold}
     >
