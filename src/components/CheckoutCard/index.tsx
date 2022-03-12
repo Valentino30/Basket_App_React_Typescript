@@ -53,7 +53,7 @@ export default function CheckoutCard({ items }: CheckoutCardProps) {
             {items.map(({ id, title, price, quantity }) => (
               <TableRow key={id}>
                 <TableData>
-                  <Text marginRight="10px">{title}</Text>
+                  <Text ellipsis marginRight="10px">{title}</Text>
                 </TableData>
                 <TableData>
                   <Input
@@ -64,7 +64,7 @@ export default function CheckoutCard({ items }: CheckoutCardProps) {
                   />
                 </TableData>
                 <TableData>
-                  <Text color="#E38A5A" bold marginLeft="10px">
+                  <Text ellipsis color="#E38A5A" bold marginLeft="10px">
                     {costInLocalCurrency(price * quantity, currency)}
                   </Text>
                 </TableData>
@@ -77,7 +77,7 @@ export default function CheckoutCard({ items }: CheckoutCardProps) {
             ))}
           </Table>
           <Wrapper>
-            <Text bold>{totalCostInLocalCurrency(items, currency)}</Text>
+            <Text ellipsis bold>{totalCostInLocalCurrency(items, currency)}</Text>
             <ButtonGroup>
               <Button onClick={handleClearClick}>Clear</Button>
               <Button
@@ -87,7 +87,7 @@ export default function CheckoutCard({ items }: CheckoutCardProps) {
           </Wrapper>
         </>
       ) : (
-        <Text>Your basket is empty.</Text>
+        <Text textAlign="center">Your basket is empty.</Text>
       )}
     </Card>
   );
