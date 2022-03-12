@@ -7,7 +7,7 @@ import Wrapper from "../../shared/Wrapper";
 import TableRow from "../../shared/TableRow";
 import TableData from "../../shared/TableData";
 import ButtonGroup from "../../shared/ButtonGroup";
-import IconButton from "../../shared/IconButton/Button";
+import IconButton from "../../shared/IconButton";
 
 import {
   currency,
