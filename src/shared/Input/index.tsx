@@ -4,5 +4,5 @@ type InputProps = {
 };
 
 export default function Input({ value, onChange }: InputProps) {
-  return <input type="number" value={value} onChange={onChange} />;
+  return <input type="number" min="0" value={value} onChange={onChange} />;
 }
